@@ -1,0 +1,78 @@
+#include <iostream>
+using namespace std;
+//(c[s]!=' ' && c[e]!='/') || (c[s]!=':' && c[e]!='@') || (c[s]!='[' && c[e]!='`') || (c[s]!='{' && (int)(c[e])!=127)
+int Getlen(char name[])
+{
+   int count = 0;
+   for(int i=0;name[i]!='\0';i++)
+   {
+      count++;
+   }
+  return count;
+}
+char TOlowerCase(char s)
+{
+   if(s>='0' && s<='9')
+    return s;
+   else{
+   if(s>='a' && s<='z')
+    return s;
+   else{
+    char temp = s - 'A' + 'a';//Converting To LowerCase
+   return temp;
+   }
+   }
+}
+bool IgnoreSpecialChar(char ch)
+{
+   if((ch>=' ' && ch<='/') || (ch>=':' && ch<='@') || (ch>='[' && ch<='`') || (ch>='{' && (int)(ch)<=127))
+    return 1;
+  return 0;
+}
+bool CheckPalindrom(string c,int n)
+{
+   int s = 0;
+   int e = n-1;
+   while(s<=e)
+   {
+   if(IgnoreSpecialChar(c[s])){
+     s++;
+    }
+  else if(IgnoreSpecialChar(c[e])){
+       e--;
+   }
+    else
+    {
+     if(TOlowerCase(c[s]) != TOlowerCase(c[e]))
+       return 0;
+     else
+     {
+        s++;
+        e--;
+     }
+    }
+   }
+   return 1;
+}
+int main()
+{
+    string s = "N2 i&nJA?a& jnI2n";
+    string s1 = "Ababa";
+    string s2 = "A1b22Ba";
+    string s3 = "5?36@6?35";
+    //cout<<s[0];
+    cout<<"Is Palindrome Or Not: "<<CheckPalindrom(s,s.size());cout<<endl;
+    cout<<"Is Palindrome Or Not: "<<CheckPalindrom(s1,s1.size());cout<<endl;
+    cout<<"Is Palindrome Or Not: "<<CheckPalindrom(s2,s2.size());cout<<endl;
+    cout<<"Is Palindrome Or Not: "<<CheckPalindrom(s3,s3.size());
+    //cout<<s.size();
+//   char name[20];
+//   cout<<"Enter Your Name: ";
+//   cin>>name;
+//   int len = Getlen(name);
+//   cout<<"Character Len Is: "<<len<<endl;
+//   cout<<"Is Palindrome Or Not: "<<CheckPalindrom(name,len);
+
+return 0;
+}
+
